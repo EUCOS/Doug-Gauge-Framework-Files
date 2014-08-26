@@ -1,0 +1,10 @@
+bin
+obj
+lib
+tmp
+share
+.todo
+results
+tags
+*.out
+*.swp
