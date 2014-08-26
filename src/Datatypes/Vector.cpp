@@ -222,6 +222,14 @@ bool Gauge::Vector::operator< (const Gauge::Vector &other) const {
   return false;
 }
 
+void Gauge::Vector::SetLeadingTrailing() {
+  leading = 0;
+  while (leading < size && base[leading] == 0) ++leading;
+
+  trailing = size;
+  while (trailing > 1 && base[trailing-1] == 0) --trailing;
+}
+
 // Printable Interface
 void Gauge::Vector::PrintTo(std::ostream *out) const {
   *out << "[ ";

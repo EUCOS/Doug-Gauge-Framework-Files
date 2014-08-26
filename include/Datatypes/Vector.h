@@ -45,7 +45,7 @@ namespace Gauge {
    * all of the main vector in the Gauge Framework.
    */
   struct Vector : public Gauge::Printable, public Gauge::Serializable {
-    int* base;    /*!< An array to hold the elements of the vector. */
+    int *base;    /*!< An array to hold the elements of the vector. */
     int den;      /*!< An integer representing the common denominator of the
                     elements of the vector. */
     int size;     /*!< An integer representing the size of the vector.*/
@@ -147,6 +147,11 @@ namespace Gauge {
     bool operator>=(const Gauge::Vector &other) const {
       return !(*this < other);
     }
+
+    /*!
+     * This method sets computes the value of the leading and trailing indices.
+     */
+    void SetLeadingTrailing();
 
     // Printable Interface
     virtual void PrintTo(std::ostream *out) const;
