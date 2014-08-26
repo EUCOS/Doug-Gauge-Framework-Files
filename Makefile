@@ -1,4 +1,4 @@
-LIBSRC=src src/Plugins
+LIBSRC=src src/Datatypes src/Interfaces src/Utility src/Processor
 LIBRARY=$(LIBDIR)/libgauge.a
 
 CMDSRC=$(wildcard cmd/*)
@@ -11,7 +11,7 @@ OBJDIR:=obj
 INCDIR:=include
 LIBDIR:=lib
 
-TESTDIR:=test
+TESTDIR:=tests
 TESTBINDIR:=$(TESTDIR)/bin
 TESTSRCDIR:=$(TESTDIR)/src
 TESTINCDIR:=$(TESTDIR)/include
@@ -22,11 +22,11 @@ GTOBJDIR:=$(GTROOT)/obj
 GTSRCDIR:=$(GTROOT)/src
 
 ARCHIVER:=ar rcs
-COMPILER:=g++ -c
-LINKER:=g++
+COMPILER:=mpic++ -std=c++11 -c
+LINKER:=mpic++ -std=c++11
 
-LIBS+=-lm -lpthread
-FLAGS+=-Wall -ansi
+LIBS+=-lm
+FLAGS+=-Wall -pedantic
 
 # Derived Library Variables
 LIBSOURCES=$(wildcard $(addsuffix /*.cpp,$(LIBSRC)))
@@ -42,13 +42,13 @@ GTOBJ=$(subst src,obj,$(GTSOURCES:%.cc=%.o))
 TESTSOURCES=$(wildcard $(addsuffix /*Test.cpp,$(TESTSRCDIR)))
 TESTBIN=$(subst $(TESTSRCDIR),$(TESTBINDIR),$(TESTSOURCES:%.cpp=%))
 
-all: FLAGS:=-Wall -ansi -pedantic -g -pg
+all: FLAGS:=-Wall -pedantic -g -pg
 all: $(LIBRARY)
 
-release: FLAGS:=-Wall -ansi -pedantic -O3
+release: FLAGS:=-Wall -pedantic -O3
 release: $(CMDBIN)
 
-exec: FLAGS:=-Wall -ansi -pedantic -g -pg
+exec: FLAGS:=-Wall -pedantic -g -pg
 exec: $(CMDBIN)
 
 # Archiving, Compiling and Cleaning the library
@@ -113,6 +113,10 @@ check: $(TESTBIN) $(addsuffix .run,$(TESTBIN))
 tests: $(TESTBIN)
 
 $(TESTBINDIR)/%.run:
+	@echo "Running Test: $*"
+	@./$(TESTBINDIR)/$*
+
+%.run:
 	@echo "Running Test: $*"
 	@./$(TESTBINDIR)/$*
 
