@@ -40,46 +40,6 @@ TEST(Constructors, Default) {
   }
 }
 
-TEST(Constructors, Full) {
-  for (int trial = 0; trial < 100; ++trial) {
-    Gauge::Group *group = Random::Group();
-    Gauge::Geometry *geometry = Random::Geometry();
-    int susy = Random::Int(0,4);
-    Gauge::Model *model = new Gauge::Model(geometry, group, susy);
-
-    EXPECT_EQ(susy, model->susy);
-    EXPECT_EQ(*geometry, *model->geometry);
-    EXPECT_EQ(*group, *model->group);
-
-    delete model;
-    delete geometry;
-    delete group;
-  }
-}
-
-TEST(Constructors, Copy) {
-  for (int trial = 0; trial < 100; ++trial) {
-    Gauge::Model *model = Random::Model();
-    Gauge::Model *copy = new Gauge::Model(*model);
-
-    EXPECT_EQ(*model, *copy);
-
-    delete copy;
-    delete model;
-  }
-}
-
-TEST(Operators, Assignment) {
-  for (int trial = 0; trial < 1; ++trial) {
-    Gauge::Model *model = Random::Model();
-    Gauge::Model copy = *model;
-
-    EXPECT_EQ(*model, copy);
-
-    delete model;
-  }
-}
-
 TEST(Operators, Equal) {
   for (int trial = 0; trial < 100; ++trial) {
     Gauge::Model *lhs = Random::Model();

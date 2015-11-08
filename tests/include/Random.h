@@ -235,11 +235,10 @@ namespace Random {
   }
 
   inline Gauge::Model *Model() {
-    Gauge::Geometry *geometry = Random::Geometry();
-    Gauge::Group *group = Random::Group();
-    Gauge::Model *model = new Gauge::Model(geometry, group, Random::Int(0,4));
-    delete group;
-    delete geometry;
+    Gauge::Model *model = new Gauge::Model();
+    model->geometry = Random::Geometry();
+    model->group = Random::Group();
+    model->susy = Random::Int(0,4);
     return model;
   }
 }
