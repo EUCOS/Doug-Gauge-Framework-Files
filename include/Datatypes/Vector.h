@@ -266,7 +266,7 @@ namespace Gauge {
       assert(alpha.size == beta.size);
       int start = std::min(alpha.leading, beta.leading);
       int stop = std::max(alpha.trailing, beta.trailing);
-      if (start >= stop) return;
+      if (start >= stop) return alpha;
       bool found = false;
       for (int index = start; index < stop; ++index) {
         alpha->base[index] =

@@ -25,10 +25,11 @@
 
 #include <algorithm>
 #include <array>
+#include <functional>
 #include <iterator>
+#include <map>
 #include <sstream>
 #include <vector>
-#include <map>
 
 #include <GSOHandler.h>
 #include <Math.h>
